@@ -1,7 +1,10 @@
 <?php
 // src/Bug.php
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+
 
 #[ORM\Entity]
 #[ORM\Table(name: 'bugs')]
@@ -11,7 +14,7 @@ class Bug
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue]
     private int|null $id = null;
-
+    private $products;
     #[ORM\Column(type: 'string')]
     private string $description;
 
@@ -20,7 +23,11 @@ class Bug
 
     #[ORM\Column(type: 'string')]
     private string $status;
-
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
+    
     public function getId(): int|null { return $this->id; }
     public function getDescription(): string { return $this->description; }
     public function setDescription(string $description): void { $this->description = $description; }
