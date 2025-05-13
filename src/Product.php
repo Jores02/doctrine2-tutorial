@@ -1,8 +1,18 @@
 <?php
 // src/Product.php
+
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity]
+#[ORM\Table(name: "products")]
 class Product
 {
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
     private int|null $id = null;
+
+    #[ORM\Column(type: "string")]
     private string $name;
 
     public function getId(): ?int
