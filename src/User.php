@@ -11,12 +11,13 @@ class User
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private int|null $id = null;
-
     #[ORM\Column(type: 'string')]
     private string $name;
-    private $reportedBugs = null;
-    private $assignedBugs = null;
-
+    #[ORM\OneToMany(targetEntity: Bug::class, mappedBy: 'reporter')]
+    private $reportedBugs;
+    #[ORM\OneToMany(targetEntity: Bug::class, mappedBy: 'engineer')]
+    private $assignedBugs;
+    
 
     public function getId(): int|null { return $this->id; }
     public function getName(): string { return $this->name; }
