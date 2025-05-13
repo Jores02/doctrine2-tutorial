@@ -23,6 +23,9 @@ class Bug
 
     #[ORM\Column(type: 'string')]
     private string $status;
+    private User $engineer;
+    private User $reporter;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -35,4 +38,21 @@ class Bug
     public function getCreated(): DateTime { return $this->created; }
     public function setStatus($status): void { $this->status = $status; }
     public function getStatus(): string { return $this->status; }
+  
+    
+    public function setEngineer(User $engineer): void
+{
+    $engineer->assignedToBug($this);
+    $this->engineer = $engineer;
+}
+public function setReporter(User $reporter): void
+{
+    $reporter->addReportedBug($this);
+    $this->reporter = $reporter;
+}
+public function getEngineer(): User {
+    return $this->engineer; 
+   }
+   public function getReporter(): User { return $this->reporter; }
+
 }

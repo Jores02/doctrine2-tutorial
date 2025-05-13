@@ -26,5 +26,23 @@ class User
     $this->reportedBugs = new ArrayCollection();
     $this->assignedBugs = new ArrayCollection();
 }
+public function addReportedBug(Bug $bug): void
+{
+    $this->reportedBugs[] = $bug;
+}
+public function assignedToBug(Bug $bug): void
+{
+    $this->assignedBugs[] = $bug;
+}
+private $products;
+public function assignToProduct(Product $product): void
+{
+$this->products[] = $product;
+}
+public function getProducts()
+{
+return $this->products;
+}
+
 
 }
