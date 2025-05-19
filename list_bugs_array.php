@@ -1,17 +1,16 @@
 <?php
-// list_bugs.php
+// list_bugs_array.php
 require_once "bootstrap.php";
-$dql = "SELECT b, e, r FROM Bug b JOIN b.engineer e JOIN b.reporter r
-ORDER BY b.created DESC";
+$dql = "SELECT b, e, r, p FROM Bug b JOIN b.engineer e ".
+"JOIN b.reporter r JOIN b.products p ORDER BY b.created DESC";
 $query = $entityManager->createQuery($dql);
-$query->setMaxResults(30);
-$bugs = $query->getResult();
+$bugs = $query->getArrayResult();
 foreach ($bugs as $bug) {
-echo $bug->getDescription()." - ".$bug->getCreated()->format('d.m.Y')."\n";
-echo " Reported by: ".$bug->getReporter()->getName()."\n";
-echo " Assigned to: ".$bug->getEngineer()->getName()."\n";
-foreach ($bug->getProducts() as $product) {
-echo " Platform: ".$product->getName()."\n";
+echo $bug['description'] . " - " . $bug['created']->format('d.m.Y')."\n";
+echo " Reported by: ".$bug['reporter']['name']."\n";
+echo " Assigned to: ".$bug['engineer']['name']."\n";
+foreach ($bug['products'] as $product) {
+echo " Platform: ".$product['name']."\n";
 }
 echo "\n";
 }
