@@ -4,7 +4,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-
 #[ORM\Entity]
 #[ORM\Table(name: 'bugs')]
 class Bug
@@ -30,7 +29,17 @@ class Bug
     {
         $this->products = new ArrayCollection();
     }
-    
+   public function assignToProduct(Product $product): void
+{
+    $this->products[] = $product;
+}
+
+public function getProducts(): Collection
+{
+    return $this->products;
+}
+
+
     public function getId(): int|null { return $this->id; }
     public function getDescription(): string { return $this->description; }
     public function setDescription(string $description): void { $this->description = $description; }

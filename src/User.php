@@ -17,8 +17,6 @@ class User
     private $reportedBugs;
     #[ORM\OneToMany(targetEntity: Bug::class, mappedBy: 'engineer')]
     private $assignedBugs;
-    
-
     public function getId(): int|null { return $this->id; }
     public function getName(): string { return $this->name; }
     public function setName(string $name): void { $this->name = $name; }
