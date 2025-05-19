@@ -63,5 +63,10 @@ public function getEngineer(): User {
     return $this->engineer; 
    }
    public function getReporter(): User { return $this->reporter; }
+   public function close(): void
+{
+    $this->status = "CLOSE";
+}
+
 
 }
